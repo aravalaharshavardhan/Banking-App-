@@ -18,25 +18,32 @@ class BankAccount:
     def get_balance(self):
         print(self.balance) 
 
-John_acc = BankAccount("John",10000)
-John_acc.deposit(5000)
-John_acc.withdraw(3000)
-John_acc.get_balance()
 
-Bob_acc = BankAccount("Bob",5000)
 
-Bob_acc.withdraw(5000)
-Bob_acc.get_balance()
-Bob_acc.withdraw(500)
-
-            
+        
 while True:
-    choice = input()
+    choice = int(input("Enter 1 for a new account, 2 for depositing, 3 for withdrawing, 4 for getting balance, 5 to quit menu"))
     if choice == 1:
         name = input("Please enter account name:")
         name_acc = BankAccount(name, 0)
+        continue
     
     elif choice == 2:
-        
+        damount = int(input("How much would you like to deposit?"))
+        name_acc.deposit(damount)
+        continue
+    
+    elif choice ==3:
+        wamount = int(input("How much would you like to withdraw?"))
+        name_acc.withdraw(wamount)
+        continue
+    
+    elif choice == 4:
+        name_acc.get_balance()
+        continue
+    
+    elif choice == 5:
+        break
+
 
     
