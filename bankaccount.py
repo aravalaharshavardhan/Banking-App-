@@ -30,6 +30,13 @@ Bob_acc.get_balance()
 Bob_acc.withdraw(500)
 
             
-
+while True:
+    choice = input()
+    if choice == 1:
+        name = input("Please enter account name:")
+        name_acc = BankAccount(name, 0)
+    
+    elif choice == 2:
+        
 
     
