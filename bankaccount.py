@@ -20,9 +20,16 @@ class BankAccount:
 
 accounts = {}
 
-        
+print("Main Menu")
+print("Press the numbers for the following actions")
+print("1. Create new account")
+print("2. Deposit amount")
+print("3. Withdraw amount")
+print("4. View Balance")
+print("5. Quit main menu")
+
 while True:
-    choice = int(input("Enter 1 for a new account, 2 for depositing, 3 for withdrawing, 4 for getting balance, 5 to quit menu"))
+    choice = int(input())
     if choice == 1:
         name = input("Please enter account name:")
         i_amount = int(input("Enter starting balance:"))
@@ -35,6 +42,7 @@ while True:
         if index in accounts:
             damount = int(input("How much would you like to deposit?"))
             accounts[index].deposit(damount)
+            print(f"You have succesfully deposited {damount} into {index}'s account")
         else:
             print("Enter a valid account name.")
         continue
@@ -44,6 +52,7 @@ while True:
         index = input("Whose account do you want to withdraw from?(Give account name) ")
         if index in accounts:
             accounts[index].withdraw(wamount)
+            print(f"You have successfully withdrawed {wamount} from {index}'s account")
         else:
             print("Enter a valid account name.")
         continue
