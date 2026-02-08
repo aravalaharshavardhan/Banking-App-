@@ -1,5 +1,26 @@
 import datetime
+import mysql.connector 
 now = datetime.datetime.now()
+
+def setup_database():
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="harsha",
+        password="harsha",
+        database="bank_app"
+    )
+    mycursor = mydb.cursor()
+    
+
+
+
+
+
+
+
+
+
+
 class BankAccount:
     def __init__(self,name,balance):
         self.name = name
