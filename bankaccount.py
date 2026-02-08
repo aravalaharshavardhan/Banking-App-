@@ -1,15 +1,68 @@
 import datetime
 import mysql.connector 
+from config import DB_CONFIG
 now = datetime.datetime.now()
 
 def setup_database():
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="harsha",
-        password="harsha",
-        database="bank_app"
-    )
+    mydb = mysql.connector.connect(**DB_CONFIG)
     mycursor = mydb.cursor()
+
+    accounts_table = """CREATE TABLE IF NOT EXISTS accounts(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    balance DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"""
+
+    mycursor.execute(accounts_table)
+
+    transactions_table = """CREATE TABLE IF NOT EXISTS transactions(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT,
+    type VARCHAR(20),
+    amount DECIMAL(10,2),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255),
+    FOREIGN KEY(account_id) REFERENCES accounts(id));"""
+
+    mycursor.execute(transactions_table)
+    mydb.commit()
+    mycursor.close()
+    mydb.close()
+
+    print("Tables created successfully.")
+
+setup_database()
+
+def create_account(name, initial_balance):
+    mydb = mysql.connector.connect(**DB_CONFIG)
+    mycursor = mydb.cursor()
+    insert_acc = "INSERT INTO accounts(name,balance) VALUES(%s,%s)"
+    values = (name, initial_balance)
+    mycursor.execute(insert_acc,values)
+    new_id = mycursor.lastrowid
+    mydb.commit()
+    mycursor.close()
+    mydb.close()
+
+    return new_id
+account_id = create_account("Harsha",1000)
+print(account_id)
+
+                    
+def get_account_balance(account_id):
+    mydb = mysql.connector.connect(**DB_CONFIG)
+    mycursor = mydb.cursor()
+    balance_return = "SELECT balance FROM accounts WHERE ID = %s"
+    value = (account_id,)
+    mycursor.execute(balance_return,value)
+    result = mycursor.fetchone()
+    mycursor.close()
+    mydb.close()
+    if result is not None:
+        return result[0]
+    else:
+        return None
+    
     
 
 
@@ -18,10 +71,8 @@ def setup_database():
 
 
 
-
-
-
 class BankAccount:
+    
     def __init__(self,name,balance):
         self.name = name
         self.balance = balance
