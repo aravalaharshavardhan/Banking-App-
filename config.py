@@ -1,6 +1,6 @@
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'harsha',
-    'password': 'harsha',
+    'user': 'whatever',
+    'password': 'whatever',
     'database': 'bank_app'
 }
