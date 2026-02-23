@@ -1,6 +1,6 @@
-1. Three options: Withdraw, deposit, check balance
-2. If balance = 0, no withdrawals and error message like you do not have sufficient balance in your account
-3. as long as balance > 0, every time you withdraw, it should get subtracted from your account and when you call get balance, it should reflect the change
-4. class object will have three methods withdraw, deposit and check balance
-5. let’s say we initialise a bank account with the same balance of 1,00,000 rupees
-6. Made a banking console interface where 1 creates a new account, 2 deposits amount into the account created, 3 withdraws the money, 4 gives you the current balance,5 gives you the statement or the transaction log with time and date, 6 quits the interface. 
+A pretty straight-forward banking account console. 
+6 choices in the banking menu: create a new account, deposit x, withdraw x, get account balance, get transactions history or quit the menu.
+Connected the console to MySQL Database. Creates a new table entry in accounts and transactions table. Updates the balance each time a change is made. 
+Transactions history shows timestamp, type of transaction etc.
+Each new account is given a account ID as per the table entry. 
+
