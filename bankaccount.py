@@ -180,6 +180,27 @@ while True:
         continue
     
     elif choice == 6:
+        payer_id = input("Whose account would you like to withdraw from?( Account ID):")
+        amount = int(input("How much would you like to transfer? "))
+        payer_balance = get_account_balance(payer_id)
+        payee_balance = get_account_balance(payee_id)
+        if account_exists(payer_id) and payer_balance >= amount:
+             payee_id = input("Whose account would you like to pay to?(Account ID) ")
+             if account_exists(payee_id):
+                 new_balance = payee_balance + amount
+                 update_account_balance(payee_id,new_balance)
+                 new_balance = payer_balance - amount
+                 update_account_balance(payer_id,new_balance)
+                 log_transaction(payee_id,"DEPOSIT",amount,f"Deposited ₹{amount}. ")
+                 log_transaction(payer_id,"WITHDRAW",amount,f"Transferred ₹{amount}.")
+                 print(f"You have successfully transferred {amount} from account ID: {payer_id} to account ID: {payee_id}")
+             else:
+                 print("Please enter a proper account ID to transfer the money to:")
+        else:
+            print("Either account ID provided doesn't exist or insufficient funds.")
+        continue
+            
+    elif choice == 7:
         break
 
 
